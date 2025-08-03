@@ -1,0 +1,5 @@
+- Smoothed some transitions for natural flow (e.g., “But as he glanced…”)
+- Shortened overly long paragraphs to aid readability
+- Removed some redundant lines where details were repeated
+- Switched passive voice to active in some places
+- Made dialogue slightly more natural

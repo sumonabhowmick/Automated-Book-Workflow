@@ -1,0 +1,23 @@
+
+import google.generativeai as genai
+
+genai.configure(api_key="AIzaSyCnOwOS0mweOWfmKHgapU94iwzGEh0Rvos")  
+
+model = genai.GenerativeModel(model_name="models/gemini-2.5-pro")
+
+def rewrite_chapter():
+    with open("chapter_original.txt", "r", encoding="utf-8") as f:
+        original_text = f.read()
+
+    prompt = f"Rewrite the following chapter in simpler, modern English:\n\n{original_text}"
+
+    response = model.generate_content(prompt)
+    rewritten = response.text
+
+    with open("chapter_rewritten_v1.txt", "w", encoding="utf-8") as f:
+        f.write(rewritten)
+
+    print("✅ Chapter rewritten using Gemini and saved as chapter_rewritten_v1.txt")
+
+rewrite_chapter()
+

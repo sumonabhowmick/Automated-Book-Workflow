@@ -1,7 +1,12 @@
 import google.generativeai as genai
 
 # Step 1: Set up Gemini
-genai.configure(api_key="AIzaSyCnOwOS0mweOWfmKHgapU94iwzGEh0Rvos")  # same one you used for rewriting
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
+
 
 # Step 2: Load rewritten chapter
 with open("chapter_rewritten_v1.txt", "r", encoding="utf-8") as f:

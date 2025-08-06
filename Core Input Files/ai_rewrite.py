@@ -1,7 +1,11 @@
 
 import google.generativeai as genai
 
-genai.configure(api_key="AIzaSyCnOwOS0mweOWfmKHgapU94iwzGEh0Rvos")  
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+genai.configure(api_key=os.getenv("GEMINI_API_KEY"))  
 
 model = genai.GenerativeModel(model_name="models/gemini-2.5-pro")
 
@@ -20,4 +24,3 @@ def rewrite_chapter():
     print("✅ Chapter rewritten using Gemini and saved as chapter_rewritten_v1.txt")
 
 rewrite_chapter()
-

@@ -9,7 +9,7 @@ genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 
 
 # Step 2: Load rewritten chapter
-with open("chapter_rewritten_v1.txt", "r", encoding="utf-8") as f:
+with open("Core Output Files/chapter_rewritten_v1.txt", "r", encoding="utf-8") as f:
     content = f.read()
 
 # Step 3: Create prompt for review
@@ -24,7 +24,7 @@ model = genai.GenerativeModel(model_name="models/gemini-2.5-pro")
 response = model.generate_content(prompt)
 
 # Step 5: Save output
-with open("chapter_review.txt", "w", encoding="utf-8") as f:
+with open("Core Output Files/chapter_review.txt", "w", encoding="utf-8") as f:
     f.write(response.text)
 
 print("✅ AI Review saved to chapter_review.txt")

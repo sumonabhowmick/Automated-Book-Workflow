@@ -1,18 +1,38 @@
 
 def reward_function(text: str) -> int:
-    """
-    Simple reward function that simulates RL by assigning scores.
-    """
     score = 0
+    word_count = len(text.split())
 
-    # Heuristic rules
-    if len(text) < 3000:
-        score += 2  # Shorter, simpler is preferred
-    if "he said" in text or "she said" in text:
-        score += 1  # Dialogues detected
-    if any(x in text.lower() for x in ["storm", "island", "ship"]):
-        score += 1  # Key thematic words present
-    if "." in text and "," in text:
-        score += 2  # Good punctuation = good readability
+    # 1. Prefer conciseness
+    if word_count < 600:
+        score += 2
+    elif word_count < 800:
+        score += 1
+
+    # 2. Look for dialogue
+    dialogue_count = text.lower().count("he said") + text.lower().count("she said")
+    if dialogue_count >= 2:
+        score += 2
+    elif dialogue_count == 1:
+        score += 1
+
+    # 3. Thematic words
+    themes = ["storm", "island", "ship", "canoe", "war"]
+    score += sum(1 for word in themes if word in text.lower())
+
+    # 4. Readability via punctuation
+    if text.count(".") > 20:
+        score += 2
+    elif text.count(".") > 10:
+        score += 1
+
+    if text.count(",") > 15:
+        score += 1
+
+    # 5. Bonus for emotional words
+    if any(word in text.lower() for word in ["love", "fear", "hope", "hate"]):
+        score += 1
 
     return score
+
+

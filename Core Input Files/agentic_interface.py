@@ -46,23 +46,23 @@ def process_command(cmd):
 
     if "scrape" in cmd or "download" in cmd:
         speak("Scraping chapter and taking screenshot.")
-        subprocess.run(["python", "scrape_and_screenshot.py"])
+        subprocess.run(["python", "Core Input Files/scrape_and_screenshot.py"])
 
     elif "rewrite" in cmd or "spin" in cmd:
         speak("Rewriting the chapter using Gemini.")
-        subprocess.run(["python", "ai_rewrite.py"])
+        subprocess.run(["python", "Core Input Files/ai_rewrite.py"])
 
     elif "edit" in cmd:
         speak("Please open the file and manually edit it.")
 
     elif "review" in cmd:
         speak("🧠 Reviewing the chapter using AI.")
-        os.system("python ai_review.py")
+        os.system("python", "Core Input Files/ai_review.py")
     
 
     elif "save versions" in cmd:
         speak("Saving all chapter versions to the database.")
-        subprocess.run(["python", "save_versions.py"])
+        subprocess.run(["python", "Core Input Files/save_versions.py"])
 
     elif "search" in cmd:
         speak("What are you searching for?")
@@ -70,11 +70,11 @@ def process_command(cmd):
         response = model.generate_content(f"Search for '{query}' in saved book versions")
         print("📚 AI says:", response.text)
         speak(response.text)
-        subprocess.run(["python", "semantic_search.py"])
+        subprocess.run(["python", "Core Input Files/semantic_search.py"])
 
-    elif "best version" in cmd or "which version" in cmd:
-        speak("Evaluating the best version using feedback scores.")
-        subprocess.run(["python", "evaluate_versions.py"])
+    elif "reward" in cmd or "score" in cmd or "evaluate" in cmd:
+        speak("Evaluating all versions using RL reward scoring.")
+        subprocess.run(["python", "Core Input Files/evaluate_versions.py"])
 
     elif "read" in cmd or "voice" in cmd or "speak" in cmd:
         speak("Reading the final chapter aloud.")
